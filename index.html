@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Countdown</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#8c4b7c;
+font-family:'Cormorant Garamond',serif;
+color:white;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+}
+
+h1{
+font-size:48px;
+margin-bottom:10px;
+color:#ffc0cb;
+}
+
+.subtitle{
+opacity:0.8;
+margin-bottom:40px;
+}
+
+.countdown{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+.box{
+background:rgba(255,255,255,0.1);
+padding:25px 35px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.number{
+font-size:48px;
+color:#ff6fa5;
+}
+
+.label{
+font-size:14px;
+letter-spacing:2px;
+opacity:0.8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div style="font-size:60px">❤️</div>
+
+<h1>Countdown</h1>
+
+<p class="subtitle">
+Every moment brings us closer to something beautiful.
+</p>
+
+<div class="countdown">
+
+<div class="box">
+<div class="number" id="days">0</div>
+<div class="label">DAYS</div>
+</div>
+
+<div class="box">
+<div class="number" id="hours">00</div>
+<div class="label">HOURS</div>
+</div>
+
+<div class="box">
+<div class="number" id="minutes">00</div>
+<div class="label">MINUTES</div>
+</div>
+
+<div class="box">
+<div class="number" id="seconds">00</div>
+<div class="label">SECONDS</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* TARGET DATE (set your real date here) */
+
+const targetDate = new Date("2026-09-20T23:59:00").getTime();
+
+/* update countdown every second */
+
+const countdown = setInterval(function(){
+
+const now = Date.now();
+const distance = targetDate - now;
+
+/* when countdown finishes */
+
+if(distance <= 0){
+
+clearInterval(countdown);
+
+document.querySelector(".countdown").innerHTML =
+"<h2 style='font-size:2rem;color:#ff74a4'>Our Moment Has Arrived ❤️</h2>";
+
+/* redirect after 3 seconds */
+
+setTimeout(function(){
+window.location.href = "love.html";
+},3000);
+
+return;
+}
+
+/* calculations */
+
+const days = Math.floor(distance / (1000*60*60*24));
+const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+/* update UI */
+
+document.getElementById("days").innerText = days;
+document.getElementById("hours").innerText = String(hours).padStart(2,"0");
+document.getElementById("minutes").innerText = String(minutes).padStart(2,"0");
+document.getElementById("seconds").innerText = String(seconds).padStart(2,"0");
+
+},1000);
+
+</script>
+
+</body>
+</html>
